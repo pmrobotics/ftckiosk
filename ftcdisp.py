@@ -8,8 +8,18 @@ import time
 import os
 import re
 import sys
+import configparser
 
-FDPORT = int(os.getenv('FDPORT', 8080))
+config = configparser.ConfigParser(allow_unnamed_section=True)
+try:
+  config.read('/boot/firmware/ftcdisp.ini')
+except FileNotFoundError:
+  pass
+
+unnamed = config[UNNAMED_SECTION]
+FDPORT = int(unnamed.get('FDPORT', 8080))
+START_URL = unnamed.get('START_URL', f"http://localhost:{FDPORT}/display")
+
 TEMPLATE_DIR = "."
 env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
 viewCount = 0;
@@ -154,8 +164,7 @@ def start_chromium(url):
 # subprocess.run(["/usr/bin/pkill", "chromium"])
 with socketserver.TCPServer(("", FDPORT), MyHandler) as httpd:
   # start initial chromium window 3 seconds after handling requests
-  threading.Timer(3, 
-    start_chromium, args=[f"http://localhost:{FDPORT}/display"]).start()     
+  threading.Timer(3, start_chromium, args=[START_URL]).start()     
   try:
     print(f"Serving at port {FDPORT}", flush=True)
     httpd.serve_forever()
