@@ -11,12 +11,13 @@ import sys
 import configparser
 
 config = configparser.ConfigParser(allow_unnamed_section=True)
+config.read_string("FDPORT=8080")
 try:
   config.read('/boot/firmware/ftcdisp.ini')
 except FileNotFoundError:
   pass
 
-unnamed = config[UNNAMED_SECTION]
+unnamed = config[configparser.UNNAMED_SECTION]
 FDPORT = int(unnamed.get('FDPORT', 8080))
 START_URL = unnamed.get('START_URL', f"http://localhost:{FDPORT}/display")
 
