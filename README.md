@@ -1,4 +1,4 @@
-# ftcdisp - FTC display manager for SBC
+# ftckiosk - FTC kiosk / display manager for SBC
 
 This is a (childishly) simple display manager server to help remotely set up FIRST Tech Challenge field timers on Raspberry Pi (RPi) devices.
 
@@ -11,7 +11,7 @@ This software provides a simple HTTP server that can be installed on the RPi and
 Installation is simple:  
 
 1. Open a terminal window
-2. Unpack the software into an accessible directory (we use $HOME/ftcdisp)
+2. Unpack the software into an accessible directory (we use $HOME/ftckiosk)
 3. Change to the software directory
 4. Run the setup.sh script
 
@@ -21,6 +21,6 @@ The setup script does four basic tasks:
 1. Via raspi-config it turns off screen blanking, enables SSH and VNC
 2. Via systemctl it disables the cups-browsed (printer) and bluetooth services
 3. Installs the wlrctl and xdotool packages to enable a remote mouse click
-4. Creates a $HOME/.config/autoexec/ftcdisp.desktop file to automatically start the ftcdisp.py server upon login.
+4. Creates a $HOME/.config/autoexec/ftckiosk.desktop file to automatically start the ftckiosk.py server upon login.
 
 

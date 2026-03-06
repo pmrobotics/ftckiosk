@@ -18,13 +18,13 @@ echo "  sudo apt --ignore-missing satisfy $PKGS"
 sudo apt --ignore-missing satisfy $PKGS
 
 echo "* Set up autostart file..."
-TMP="/var/tmp/ftcdisp.desktop"
+TMP="/var/tmp/ftckiosk.desktop"
 AUTOSTART_DIR="$HOME/.config/autostart"
 cat <<END_AUTOSTART >$TMP
 [Desktop Entry]
 Type=Application
-Name=FTCdisp
-Exec=sh -c "cd $PWD; systemd-inhibit --what=idle /usr/bin/python3 ftcdisp.py >>server.log 2>&1 &"
+Name=FTCkiosk
+Exec=sh -c "cd $PWD; systemd-inhibit --what=idle /usr/bin/python3 ftckiosk.py >>server.log 2>&1 &"
 Terminal=true
 END_AUTOSTART
 echo "  Contents of $TMP:"
